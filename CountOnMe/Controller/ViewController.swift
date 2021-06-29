@@ -37,12 +37,13 @@ class ViewController: UIViewController {
         if expressionHaveResult {
             textView.text = ""
         }
-        
-        textView.text.append(numberText)
+
         print(elements)//delete
-        if elements.count > 2 && calculator.divisionByZero(elements: elements) {
-        alertMassege("You cannot divide by zero")
-        textView.text.removeAll()
+        if elements.count > 1 && calculator.divisionByZero(number: numberText,elements: elements) {
+        alertMassege("You cannot divide by zero") // !!!!change nom message
+        } else {
+            textView.text.append(numberText)
+            print(elements)//delete
         }
     }
     

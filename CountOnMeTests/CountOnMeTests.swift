@@ -48,11 +48,12 @@ class CountOnMeTests: XCTestCase {
     }
     
     func testGivenDivisionByZero_WhenTestingExpressionIsCorrect_ThenItIsTrue() {
-        XCTAssertTrue(calculator.divisionByZero(elements: ["2", "-", "+", "2", "/", "0"]))
+        XCTAssertTrue(calculator.divisionByZero(number: "0", elements: ["2", "-", "+", "2", "/"]))
     }
     
     func testGivenMathPriority_WhenTestingExpressionHasCorrectResult_ThenItIsCorrect() {
         XCTAssertEqual(calculator.mathPriority(elements: ["2", "+", "2", "/", "2"]), "3.0")
         XCTAssertEqual(calculator.mathPriority(elements: ["3", "+", "3", "*", "2"]), "9.0")
+        XCTAssertEqual(calculator.mathPriority(elements: ["3", "+", "3", "*", "2", "-", "2", "/", "2"]), "8.0")
     }
 }

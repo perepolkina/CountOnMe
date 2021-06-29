@@ -29,21 +29,21 @@ class Calculator {
         return elements.isEmpty
     }
     
-    func divisionByZero(elements: [String]) -> Bool  {
-        return elements[elements.count-2] == "/" && elements[elements.count-1] == "0"
+    func divisionByZero(number: String,elements: [String]) -> Bool  {
+        return elements[elements.count-1] == "/" && number == "0"
     }
     
     func mathPriority(elements: [String]) -> String {
         print(elements)
-        var newexpression = elements.joined()
-        print(newexpression)
-        let expr =  NSExpression(format: newexpression)
+        var newExpression = elements.joined()
+        print(newExpression)
+        let expr =  NSExpression(format: newExpression)
         print(expr)
         if let result = expr.toFloatingPoint().expressionValue(with: nil, context: nil) as? Double {
             print(result)
-            newexpression = String(result)
+            newExpression = String(result)
         }
-        return newexpression
+        return newExpression
     }
 }
 
@@ -59,10 +59,8 @@ extension NSExpression {
             let newArgs = arguments.map { $0.map { $0.toFloatingPoint() } }
             return NSExpression(forFunction: operand, selectorName: function, arguments: newArgs)
         default:
-            print("erreur")
+            print("erreur")// break
         }
         return self
     }
 }
-
-
