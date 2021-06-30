@@ -52,8 +52,13 @@ class CountOnMeTests: XCTestCase {
     }
     
     func testGivenMathPriority_WhenTestingExpressionHasCorrectResult_ThenItIsCorrect() {
-        XCTAssertEqual(calculator.mathPriority(elements: ["2", "+", "2", "/", "2"]), "3.0")
-        XCTAssertEqual(calculator.mathPriority(elements: ["3", "+", "3", "*", "2"]), "9.0")
-        XCTAssertEqual(calculator.mathPriority(elements: ["3", "+", "3", "*", "2", "-", "2", "/", "2"]), "8.0")
+        XCTAssertEqual(calculator.mathPriority(elements: ["2", "+", "2", "/", "2"]), "3")
+        XCTAssertEqual(calculator.mathPriority(elements: ["3", "+", "3", "*", "2"]), "9")
+        XCTAssertEqual(calculator.mathPriority(elements: ["3", "+", "3", "*", "2", "-", "2", "/", "2"]), "8")
+    }
+    func testGivenChangeFormat_WhenTestingExpressionHasCorrectResult_ThenItIsCorrect() {
+        XCTAssertEqual(calculator.changeFormat(number: 4.0), "4")
+        XCTAssertEqual(calculator.changeFormat(number: 2.35), "2.35")
+        XCTAssertEqual(calculator.changeFormat(number: 0.666667), "0.666667")
     }
 }

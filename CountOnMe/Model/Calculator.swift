@@ -34,33 +34,37 @@ class Calculator {
     }
     
     func mathPriority(elements: [String]) -> String {
-        print(elements)
+        print(elements)//delete
         var newExpression = elements.joined()
-        print(newExpression)
+        print(newExpression)//delete
         let expr =  NSExpression(format: newExpression)
-        print(expr)
+        print(expr)//delete
         if let result = expr.toFloatingPoint().expressionValue(with: nil, context: nil) as? Double {
-            print(result)
-            newExpression = String(result)
+            print(result)//delete
+            newExpression = changeFormat(number: result)
         }
         return newExpression
     }
-}
-
-// change format to double Double
-extension NSExpression {
-    func toFloatingPoint() -> NSExpression {
-        switch expressionType {
-        case .constantValue:
-            if let value = constantValue as? NSNumber {
-                return NSExpression(forConstantValue: NSNumber(value: value.doubleValue))
-            }
-        case .function:
-            let newArgs = arguments.map { $0.map { $0.toFloatingPoint() } }
-            return NSExpression(forFunction: operand, selectorName: function, arguments: newArgs)
-        default:
-            print("erreur")// break
-        }
-        return self
+    // remove a decimal from a float if the decimal is equal to 0?
+    func changeFormat (number: Double) -> String {
+        return String(format: "%g", number)
     }
 }
+    
+    // change format to Float
+    extension NSExpression {
+        func toFloatingPoint() -> NSExpression {
+            switch expressionType {
+            case .constantValue:
+                if let value = constantValue as? NSNumber {
+                    return NSExpression(forConstantValue: NSNumber(value: value.doubleValue))
+                }
+            case .function:
+                let newArgs = arguments.map { $0.map { $0.toFloatingPoint() } }
+                return NSExpression(forFunction: operand, selectorName: function, arguments: newArgs)
+            default:
+                print("erreur")// break
+            }
+            return self
+        }
+    }

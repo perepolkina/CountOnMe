@@ -37,10 +37,10 @@ class ViewController: UIViewController {
         if expressionHaveResult {
             textView.text = ""
         }
-
+        
         print(elements)//delete
         if elements.count > 1 && calculator.divisionByZero(number: numberText,elements: elements) {
-        alertMassege("You cannot divide by zero") // !!!!change nom message
+            alertMessage("You cannot divide by zero")
         } else {
             textView.text.append(numberText)
             print(elements)//delete
@@ -48,21 +48,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
-        twoAlert(" + ")
+        switch sender.tag {
+        case 1:
+            twoAlert(" + ")
+        case 2:
+            twoAlert(" - ")
+        case 3:
+            twoAlert(" * ")
+        case 4:
+            twoAlert(" / ")
+        default:
+            print("erreur")
+        }
     }
-    
-    @IBAction func tappedSubstractionButton(_ sender: UIButton) {
-        twoAlert(" - ")
-    }
-
-    @IBAction func tappedDivisionButton(_ sender: Any) {
-        twoAlert(" / ")
-    }
-    
-    @IBAction func tappedMultiplicationButton(_ sender: Any) {
-        twoAlert(" * ")
-    }
-  
     
     @IBAction func tappedACButton(_ sender: Any) {
         textView.text.removeAll()
@@ -75,27 +73,27 @@ class ViewController: UIViewController {
             //textView.text.removeAll()
             print(elements)
         } else {
-            alertMassege("Start a new calculation")
+            alertMessage("Start a new calculation")
         }
     }
-
-    func alertMassege(_ message: String) {
+    
+    func alertMessage(_ message: String) {
         let alertVC = UIAlertController(title: "Error!", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
-
+    
     func twoAlert(_ element: String) {
         if  calculator.firstElementIsEmpty(elements: elements) {
-            alertMassege("Enter number !")
+            alertMessage("Enter number !")
         } else if calculator.canAddOperator(elements: elements) && !elements.contains("="){
             textView.text.append(element)
         } else if calculator.canAddOperator(elements: elements) && elements.contains("="){
-            alertMassege("Start a new calculation !")
+            alertMessage("Start a new calculation !")
         } else  {
-            alertMassege("An operator is already used !")
+            alertMessage("An operator is already used !")
         }
     }
-    
 }
+
 
