@@ -33,30 +33,27 @@ class ViewController: UIViewController {
         guard let numberText = sender.title(for: .normal) else {
             return
         }
-        print(elements)//delete
         if expressionHaveResult {
             textView.text = ""
         }
         
-        print(elements)//delete
         if elements.count > 1 && calculator.divisionByZero(number: numberText,elements: elements) {
             alertMessage("You cannot divide by zero")
         } else {
             textView.text.append(numberText)
-            print(elements)//delete
         }
     }
     
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            twoAlert(" + ")
+            threeAlerts(" + ")
         case 2:
-            twoAlert(" - ")
+            threeAlerts(" - ")
         case 3:
-            twoAlert(" * ")
+            threeAlerts(" * ")
         case 4:
-            twoAlert(" / ")
+            threeAlerts(" / ")
         default:
             print("erreur")
         }
@@ -69,9 +66,6 @@ class ViewController: UIViewController {
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         if calculator.expressionIsCorrect(elements: elements) && !elements.contains("="){
             textView.text.append(" = \(calculator.mathPriority(elements: elements))")
-            print(elements)
-            //textView.text.removeAll()
-            print(elements)
         } else {
             alertMessage("Start a new calculation")
         }
@@ -83,7 +77,7 @@ class ViewController: UIViewController {
         self.present(alertVC, animated: true, completion: nil)
     }
     
-    func twoAlert(_ element: String) {
+    func threeAlerts(_ element: String) {
         if  calculator.firstElementIsEmpty(elements: elements) {
             alertMessage("Enter number !")
         } else if calculator.canAddOperator(elements: elements) && !elements.contains("="){

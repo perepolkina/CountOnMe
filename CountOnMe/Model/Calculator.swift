@@ -34,19 +34,20 @@ class Calculator {
     }
     
     func mathPriority(elements: [String]) -> String {
-        print(elements)//delete
+        // Connect all elements to one string -> "2+2*2-2/2"
         var newExpression = elements.joined()
-        print(newExpression)//delete
+        
+        // convert string to next computation -> (2 + (2 * 2)) - (2 / 2)
         let expr =  NSExpression(format: newExpression)
-        print(expr)//delete
+        // take result NSExpression -> 5
         if let result = expr.toFloatingPoint().expressionValue(with: nil, context: nil) as? Double {
-            print(result)//delete
-            newExpression = changeFormat(number: result)
+            newExpression = removeZeroFromDecimal(number: result)
         }
         return newExpression
     }
+    
     // remove a decimal from a float if the decimal is equal to 0?
-    func changeFormat (number: Double) -> String {
+    func removeZeroFromDecimal (number: Double) -> String {
         return String(format: "%g", number)
     }
 }
